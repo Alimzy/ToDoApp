@@ -1,7 +1,8 @@
 package main
 
 import (
-	"net/http"
+	"gotask/routes"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,9 +11,7 @@ func main() {
 	r := gin.Default()
 
 	// A simple health-check route
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "pong"})
-	})
+	routes.SetupRoutes(r)
 
 	// Start the server on port 8080
 	r.Run(":8080")
