@@ -20,6 +20,18 @@ type Task struct {
 	CreatedAt   time.Time `json:"created_at"`
 }
 
+type UpdateTaskInput struct {
+	Title       string `json:"title"       binding:"required"`
+	Description string `json:"description" binding:"required"`
+	Status      Status `json:"status"      binding:"required"`
+}
+
+type PatchTaskInput struct {
+	Title       *string `json:"title"`
+	Description *string `json:"description"`
+	Status      *Status `json:"status"`
+}
+
 // CreateTaskInput holds the fields a client sends when creating a task
 type CreateTaskInput struct {
 	Title       string `json:"title"       binding:"required"`
