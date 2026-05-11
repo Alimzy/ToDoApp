@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da1cab92-b7c9-44a9-a331-d09e85b874d6" name="Changes" comment="updated my main to connect with router">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+    <list default="true" id="da1cab92-b7c9-44a9-a331-d09e85b874d6" name="Changes" comment="Completed config.go file">
+      <change afterPath="$PROJECT_DIR$/db/db.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,6 +112,7 @@
     <MESSAGE value="Completed my handler package and task_handler file" />
     <MESSAGE value="Completed my routes package and routes&#10; file" />
     <MESSAGE value="updated my main to connect with router" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated my main to connect with router" />
+    <MESSAGE value="Completed config.go file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed config.go file" />
   </component>
 </project>
