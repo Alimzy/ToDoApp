@@ -71,3 +71,92 @@ func GetTask(c *gin.Context) {
 	}
 	c.JSON(http.StatusNotFound, gin.H{"error": "task not found"})
 }
+
+func UpdateTask(c *gin.Context) {
+	id, ok := parseID(c)
+	if !ok {
+		return
+	}
+
+	var input models.UpdateTaskInput
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	mu.Lock()
+	defer mu.Unlock()
+
+	for i, t := range tasks {
+		if t.ID == id {
+			tasks[i].Title = input.Title
+			tasks[i].Description = input.Description
+			tasks[i].Status = input.Status
+			c.JSON(http.StatusOK, gin.H{"data": tasks[i]})
+			return
+		}
+	}
+	c.JSON(http.StatusNotFound, gin.H{"error": "task not found"})
+}
+
+func DeleteTask(c *gin.Context) {
+	id, ok := parseID(c)
+	if !ok {
+		return
+	}
+
+	mu.Lock()
+	defer mu.Unlock()
+
+	for i, t := range tasks {
+		if t.ID == id {
+			tasks = append(tasks[:i], tasks[i+1:]...)
+			c.Status(http.StatusNoContent)
+			return
+		}
+	}
+	c.JSON(http.StatusNotFound, gin.H{"error": "task not found"})
+}
+
+func PatchTask(c *gin.Context) {
+	id, ok := parseID(c)
+	if !ok {
+		return
+	}
+
+	var input models.PatchTaskInput
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	mu.Lock()
+	defer mu.Unlock()
+
+	for i, t := range tasks {
+		if t.ID == id {
+			if input.Title != nil {
+				tasks[i].Title = *input.Title
+			}
+			if input.Description != nil {
+				tasks[i].Description = *input.Description
+			}
+			if input.Status != nil {
+				tasks[i].Status = *input.Status
+			}
+			c.JSON(http.StatusOK, gin.H{"data": tasks[i]})
+			return
+		}
+	}
+	c.JSON(http.StatusNotFound, gin.H{"error": "task not found"})
+}
+
+func parseID(c *gin.Context) (uint, bool) {
+	idStr := c.Param("id")
+	id, err := strconv.ParseUint(idStr, 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
+		return 0, false
+	}
+	return uint(id), true
+}

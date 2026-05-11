@@ -32,7 +32,6 @@ type PatchTaskInput struct {
 	Status      *Status `json:"status"`
 }
 
-// CreateTaskInput holds the fields a client sends when creating a task
 type CreateTaskInput struct {
 	Title       string `json:"title"       binding:"required"`
 	Description string `json:"description"`

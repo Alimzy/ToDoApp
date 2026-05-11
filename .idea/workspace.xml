@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da1cab92-b7c9-44a9-a331-d09e85b874d6" name="Changes" comment="Testig and ruuning muuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu">
-      <change afterPath="$PROJECT_DIR$/models/task.go" afterDir="false" />
+    <list default="true" id="da1cab92-b7c9-44a9-a331-d09e85b874d6" name="Changes" comment="updated my main to connect with router">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/task_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/task_handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/task.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/task.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +104,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Testig and ruuning muuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testig and ruuning muuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu" />
+    <MESSAGE value="Completed my model package and my task file" />
+    <MESSAGE value="Completed my handler package and task_handler file" />
+    <MESSAGE value="Completed my routes package and routes&#10; file" />
+    <MESSAGE value="updated my main to connect with router" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated my main to connect with router" />
   </component>
 </project>
