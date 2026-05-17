@@ -20,6 +20,8 @@ type Task struct {
 	Description string     `json:"description"`
 	Status      Status     `json:"status"      gorm:"default:pending"`
 	DueDate     *time.Time `json:"due_date"`
+	UserID uint `json:"user_id" gorm:"not null"`
+
 }
 
 type CreateTaskInput struct {
