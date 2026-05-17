@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type Status string
 
@@ -10,21 +14,23 @@ const (
 	StatusDone       Status = "done"
 )
 
-// Task now embeds gorm.Model which gives us ID, CreatedAt, UpdatedAt, DeletedAt
 type Task struct {
 	gorm.Model
-	Title       string `json:"title"       gorm:"not null"`
-	Description string `json:"description"`
-	Status      Status `json:"status"       gorm:"default:pending"`
+	Title       string     `json:"title"       gorm:"not null"`
+	Description string     `json:"description"`
+	Status      Status     `json:"status"      gorm:"default:pending"`
+	DueDate     *time.Time `json:"due_date"`
 }
 
 type CreateTaskInput struct {
-	Title       string `json:"title"       binding:"required"`
-	Description string `json:"description"`
+	Title       string     `json:"title"       binding:"required"`
+	Description string     `json:"description"`
+	DueDate     *time.Time `json:"due_date"`
 }
 
 type UpdateTaskInput struct {
-	Title       string `json:"title"`
-	Description string `json:"description"`
-	Status      Status `json:"status"`
+	Title       string     `json:"title"`
+	Description string     `json:"description"`
+	Status      Status     `json:"status"`
+	DueDate     *time.Time `json:"due_date"`
 }
