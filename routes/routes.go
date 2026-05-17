@@ -17,5 +17,5 @@ func SetupRoutes(r *gin.Engine) {
 		}
 	}
 
-	return r
+	
 }

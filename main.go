@@ -19,6 +19,8 @@ func main() {
 
 	cfg := config.Load()
 	db.Connect(cfg)
-	r := routes.SetupRoutes()
+
+	r := gin.Default()
+	routes.SetupRoutes(r)
 	r.Run(":8080")
 }
