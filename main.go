@@ -1,18 +1,24 @@
 package main
 
 import (
+	"log"
+
+	"github.com/joho/godotenv"
+	"gotask/config"
+	"gotask/db"
 	"gotask/routes"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// gin.Default() gives us a router with Logger and Recovery middleware
-	r := gin.Default()
 
-	// A simple health-check route
-	routes.SetupRoutes(r)
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, relying on environment")
+	}
 
-	// Start the server on port 8080
+	cfg := config.Load()
+	db.Connect(cfg)
+	r := routes.SetupRoutes()
 	r.Run(":8080")
 }

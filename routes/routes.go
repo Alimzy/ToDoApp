@@ -16,4 +16,6 @@ func SetupRoutes(r *gin.Engine) {
 			tasks.GET("/:id", handlers.GetTask)
 		}
 	}
+
+	return r
 }

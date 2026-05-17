@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da1cab92-b7c9-44a9-a331-d09e85b874d6" name="Changes" comment="Created and completed my db package and file">
-      <change beforePath="$PROJECT_DIR$/models/task.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/task.go" afterDir="false" />
+    <list default="true" id="da1cab92-b7c9-44a9-a331-d09e85b874d6" name="Changes" comment="Updated my models">
+      <change beforePath="$PROJECT_DIR$/handlers/task_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/task_handlers.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +114,7 @@
     <MESSAGE value="updated my main to connect with router" />
     <MESSAGE value="Completed config.go file" />
     <MESSAGE value="Created and completed my db package and file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created and completed my db package and file" />
+    <MESSAGE value="Updated my models" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated my models" />
   </component>
 </project>
