@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"net/http"
-
+	"strconv"
 	"gotask/db"
 	"gotask/models"
 
@@ -11,18 +11,42 @@ import (
 
 func GetTasks(c *gin.Context) {
 	var tasks []models.Task
+	var total int64
 
-	// Filter by status if query param is provided
+	
+	page := 1
+	limit := 10
+
+	if p, err := strconv.Atoi(c.Query("page")); err == nil && p > 0 {
+		page = p
+	}
+	if l, err := strconv.Atoi(c.Query("limit")); err == nil && l > 0 {
+		limit = l
+	}
+
+	offset := (page - 1) * limit
+
+
 	query := db.DB.Model(&models.Task{})
 	if status := c.Query("status"); status != "" {
 		query = query.Where("status = ?", status)
 	}
 
-	if err := query.Find(&tasks).Error; err != nil {
+	
+	query.Count(&total)
+
+
+	if err := query.Offset(offset).Limit(limit).Find(&tasks).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": tasks})
+
+	c.JSON(http.StatusOK, gin.H{
+		"data":  tasks,
+		"page":  page,
+		"limit": limit,
+		"total": total,
+	})
 }
 
 func CreateTask(c *gin.Context) {
