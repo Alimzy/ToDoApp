@@ -41,6 +41,10 @@ func GetTasks(c *gin.Context) {
 		return
 	}
 
+user, _ := c.MustGet("currentUser").(models.User)
+db.DB.Where("user_id = ?", user.ID).Find(&tasks)
+
+
 	c.JSON(http.StatusOK, gin.H{
 		"data":  tasks,
 		"page":  page,
@@ -55,12 +59,19 @@ func CreateTask(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	user, _ := c.MustGet("currentUser").(models.User)
+	task := models.Task{
+		Title:       input.Title,
+		Description: input.Description,
+		UserID:      user.ID,   
+	}
 
-	task := models.Task{Title: input.Title, Description: input.Description}
+
 	if err := db.DB.Create(&task).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+	
 	c.JSON(http.StatusCreated, gin.H{"data": task})
 }
 
@@ -70,6 +81,13 @@ func GetTask(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "task not found"})
 		return
 	}
+user, _ := c.MustGet("currentUser").(models.User)
+
+	if task.UserID != user.ID {
+    c.JSON(http.StatusForbidden, gin.H{"error": "not your task"})
+    return
+}
+
 	c.JSON(http.StatusOK, gin.H{"data": task})
 }
 
@@ -85,6 +103,11 @@ func UpdateTask(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	user, _ := c.MustGet("currentUser").(models.User)
+	if task.UserID != user.ID {
+	c.JSON(http.StatusForbidden, gin.H{"error": "not your task"})
+	return
+}
 
 	db.DB.Model(&task).Updates(input)
 	c.JSON(http.StatusOK, gin.H{"data": task})
@@ -96,6 +119,11 @@ func DeleteTask(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "task not found"})
 		return
 	}
+	user, _ := c.MustGet("currentUser").(models.User)
+	if task.UserID != user.ID {
+	c.JSON(http.StatusForbidden, gin.H{"error": "not your task"})
+	return
+}
 	db.DB.Delete(&task)
 	c.JSON(http.StatusNoContent, nil)
 }
